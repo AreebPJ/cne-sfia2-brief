@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  frontend:
+    image: frontend
+    build: ./frontend
+  backend:
+    image: backend
+    build: ./backend
+    environment:
+        DATABASE_URI: mysql+pymysql://root:password@database:3306/users
+        SECRET KEY: password
+  database:
+    image: database
+    build: ./database
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=password
