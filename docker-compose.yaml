@@ -13,5 +13,4 @@ services:
     image: database
     build: ./database
     environment:
-      - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD=password
