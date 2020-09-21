@@ -8,12 +8,12 @@ services:
     build: ./backend
     environment:
         DATABASE_URI: mysql+pymysql://root:password@database:3306/users
-        SECRET KEY: password
+        SECRET KEY: ${SECRET_KEY}
   database:
     image: database
     build: ./database
     environment:
-      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
   nginx:
     image: nginx:latest
     ports:
