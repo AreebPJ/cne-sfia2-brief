@@ -1,19 +1,19 @@
 version: '3.7'
 services:
   frontend:
-    image: frontend
+    image: apanj/frontend:${app_version}
     build: ./frontend
   backend:
-    image: backend
+    image: apanj/backend:${app_version}
     build: ./backend
     environment:
         DATABASE_URI: ${DATABASE_URI}
         SECRET KEY: ${SECRET_KEY}
   database:
-    image: database
+    image: apanj/database:${app_version}
     build: ./database
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD={DB_PASSWORD}
   nginx:
     image: nginx:latest
     ports:
