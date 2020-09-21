@@ -5,7 +5,7 @@ pipeline{
             rollback = 'true'
         }
         stages{
-            stage('Build Image'){
+            stage('Build frontend Image'){
                 steps{
                     script{
                         if (env.rollback == 'false'){
@@ -14,7 +14,7 @@ pipeline{
                     }
                 }          
             }
-            stage('Tag & Push Image'){
+            stage('Tag & Push frontend Image'){
                 steps{
                     script{
                         if (env.rollback == 'false'){
@@ -25,7 +25,7 @@ pipeline{
                     }
                 }          
             }
-            stage('Build Image'){
+            stage('Build backend Image'){
                 steps{
                     script{
                         if (env.rollback == 'false'){
@@ -34,7 +34,7 @@ pipeline{
                     }
                 }          
             }
-            stage('Tag & Push Image'){
+            stage('Tag & Push backend Image'){
                 steps{
                     script{
                         if (env.rollback == 'false'){
@@ -45,7 +45,7 @@ pipeline{
                     }
                 }          
             }
-            stage('Build Image'){
+            stage('Build database Image'){
                 steps{
                     script{
                         if (env.rollback == 'false'){
@@ -54,13 +54,22 @@ pipeline{
                     }
                 }          
             }
-            stage('Tag & Push Image'){
+            stage('Tag & Push database Image'){
                 steps{
                     script{
                         if (env.rollback == 'false'){
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
                                 image.push("${env.app_version}")
                             }
+                        }
+                    }
+                }          
+            }
+            stage('Build nginx Image'){
+                steps{
+                    script{
+                        if (env.rollback == 'false'){
+                            image = docker.build("nginx:latest")
                         }
                     }
                 }          
@@ -72,4 +81,5 @@ pipeline{
             }
         }    
 }
+
 
