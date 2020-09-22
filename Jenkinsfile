@@ -98,6 +98,7 @@ EOF
                     cd cne-sfia2-brief.git
                     docker-compose up -d
 EOF
+                    '''
                 }
             }
         }    
