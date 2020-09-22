@@ -2,7 +2,7 @@ pipeline{
         agent any
         environment {
             app_version = 'v1'
-            rollback = 'true'
+            rollback = 'false'
         }
         stages{
             stage('Install Docker and Docker-Compose'){
@@ -92,7 +92,12 @@ EOF
             }
             stage('Deploy App'){
                 steps{
-                    sh "docker-compose up -d"
+                    sh '''
+                    ssh areebpanjwani09@34.105.155.158 <<EOF
+                    git clone https://gitlab.com/AreebP/cne-sfia2-brief.git
+                    cd cne-sfia2-brief.git
+                    docker-compose up -d
+EOF
                 }
             }
         }    
