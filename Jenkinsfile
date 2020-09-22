@@ -8,6 +8,7 @@ pipeline{
             stage('Install Docker and Docker-Compose'){
                 steps{
                     sh '''
+                    ssh areebpanjwani09@34.105.155.158 <<EOF
                     curl https://get.docker.com | sudo bash 
                     sudo usermod -aG docker $(whoami)
                     sudo apt update
@@ -15,6 +16,7 @@ pipeline{
                     version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
                     sudo curl -L "https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
                     sudo chmod +x /usr/local/bin/docker-compose 
+                    EOF
                     '''
   
             }
