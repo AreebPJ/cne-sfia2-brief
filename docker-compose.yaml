@@ -13,6 +13,7 @@ services:
     image: mysql
     build: ./database
     environment:
+      - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD={DB_PASSWORD}
   nginx:
     image: nginx:latest
