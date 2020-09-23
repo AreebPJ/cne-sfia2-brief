@@ -25,11 +25,9 @@ EOF
                 steps{
                     script{
                         if (env.rollback == 'false'){
-                            sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             image = docker.build("apanj/frontend")
 EOF
-                            '''
                         }
                     }
                 }          
