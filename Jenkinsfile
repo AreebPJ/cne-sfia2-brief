@@ -80,15 +80,12 @@ EOF
             stage('Build nginx Image'){
                 steps{
                     script{
-                            sh '''
-                            ssh areebpanjwani09@34.105.155.158 <<EOF
-                            cd cne-sfia2-brief
-                            docker build -t nginx:latest . 
-EOF
-                            '''
+                        if (env.rollback == 'false'){
+                            image = docker.build("nginx:latest")
                         }
                     }
-                }
+                }          
+            }
             stage('Deploy App'){
                 steps{
                     sh '''
@@ -101,5 +98,5 @@ EOF
                 }          
             }
 
-        }    
-
+        } 
+        
