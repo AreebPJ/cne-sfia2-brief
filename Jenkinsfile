@@ -38,6 +38,7 @@ EOF
                         if (env.rollback == 'false'){
                             sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
+                            cd cne-sfia2-brief/frontend
                             docker build -t apanj/frontend . 
 EOF
                             '''
