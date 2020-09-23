@@ -9,8 +9,8 @@ services:
     environment:
         DATABASE_URI: ${DATABASE_URI}
         SECRET KEY: ${SECRET_KEY}
-  database:
-    image: database
+  mysql:
+    image: mysql
     build: ./database
     environment:
       - MYSQL_ROOT_PASSWORD={DB_PASSWORD}
