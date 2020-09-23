@@ -83,8 +83,7 @@ EOF
                     cd cne-sfia2-brief
                     export DATABASE_URI=mysql+pymysql://root:password@mysql:3306/users
                     export SECRET_KEY=password
-                    export app_version=v1
-                    export DB_PASSWORD=password
+                    export MYSQL_ROOT_PASSWORD=password
                     docker-compose up -d
 EOF
                     '''
