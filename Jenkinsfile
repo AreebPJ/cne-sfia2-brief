@@ -46,21 +46,7 @@ EOF
                     }
                 }          
             }
-            stage('Tag & Push frontend Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh areebpanjwani09@34.105.155.158 <<EOF
-                            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                            docker push apanj/frontend
-                            }
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
+
             stage('Build backend Image'){
                 steps{
                     script{
@@ -75,21 +61,7 @@ EOF
                     }
                 }          
             }
-            stage('Tag & Push backend Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh areebpanjwani09@34.105.155.158 <<EOF
-                            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                            docker push apanj/backend
-                            }
-EOF
-                            ''' 
-                        }
-                    }
-                }          
-            }
+
             stage('Build database Image'){
                 steps{
                     script{
@@ -104,21 +76,7 @@ EOF
                     }
                 }          
             }
-            stage('Tag & Push database Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh areebpanjwani09@34.105.155.158 <<EOF
-                            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                            docker push apanj/database
-                            }
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
+
             stage('Build nginx Image'){
                 steps{
                     script{
