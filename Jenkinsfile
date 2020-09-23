@@ -26,7 +26,7 @@ EOF
                     sh '''
                     ssh areebpanjwani09@34.105.155.158 <<EOF
                     git clone https://gitlab.com/AreebP/cne-sfia2-brief.git
-                    cd cne-sfia2-brief.git
+                    cd cne-sfia2-brief
 EOF
                     '''
             }
@@ -110,7 +110,7 @@ EOF
                     sh '''
                     ssh areebpanjwani09@34.105.155.158 <<EOF
                     git clone https://gitlab.com/AreebP/cne-sfia2-brief.git
-                    cd cne-sfia2-brief.git
+                    cd cne-sfia2-brief
                     docker-compose up -d
 EOF
                     '''
