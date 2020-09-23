@@ -54,9 +54,9 @@ EOF
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
                             docker push apanj/frontend
-EOF
-                            '''  
                             }
+EOF
+                            '''
                         }
                     }
                 }          
@@ -83,9 +83,9 @@ EOF
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
                             docker push apanj/backend
-EOF
-                            '''  
                             }
+EOF
+                            ''' 
                         }
                     }
                 }          
@@ -112,9 +112,9 @@ EOF
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
                             docker push apanj/database
-EOF
-                            '''                                 
                             }
+EOF
+                            '''
                         }
                     }
                 }          
