@@ -21,14 +21,14 @@ EOF
   
             }
         }
-          stage('clone repo and change directory'){
-              steps{
-                  sh '''
-                  ssh areebpanjwani09@34.105.155.158 <<EOF
-                  git clone https://gitlab.com/AreebP/cne-sfia2-brief.git
-                  cd cne-sfia2-brief.git
+            stage('clone repo and change directory'){
+                steps{
+                    sh '''
+                    ssh areebpanjwani09@34.105.155.158 <<EOF
+                    git clone https://gitlab.com/AreebP/cne-sfia2-brief.git
+                    cd cne-sfia2-brief.git
 EOF
-                  '''
+                    '''
             }
         }
       
