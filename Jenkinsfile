@@ -69,7 +69,7 @@ EOF
                             sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             cd cne-sfia2-brief/database
-                            docker build -t database . 
+                            docker build -t mysql . 
 EOF
                             '''
                         }
@@ -84,6 +84,7 @@ EOF
                     export DATABASE_URI=mysql+pymysql://root:password@mysql:3306/users
                     export SECRET_KEY=password
                     export app_version=v1
+                    export MYSQL_ROOT_PASSWORD=password
                     docker-compose up -d
 EOF
                     '''
