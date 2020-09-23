@@ -130,8 +130,7 @@ EOF
                             '''
                         }
                     }
-                }          
-            }
+                }
             stage('Deploy App'){
                 steps{
                     sh '''
@@ -140,7 +139,9 @@ EOF
                     docker-compose up -d
 EOF
                     '''
-                }
+                    }
+                }          
             }
+
         }    
-}
+
