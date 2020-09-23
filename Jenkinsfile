@@ -39,7 +39,7 @@ EOF
                             sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             cd cne-sfia2-brief/frontend
-                            docker build -t apanj/frontend . 
+                            docker build -t frontend . 
 EOF
                             '''
                         }
@@ -54,7 +54,7 @@ EOF
                             sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             cd cne-sfia2-brief/backend
-                            docker build -t apanj/backend . 
+                            docker build -t backend . 
 EOF
                             '''
                         }
@@ -69,7 +69,7 @@ EOF
                             sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             cd cne-sfia2-brief/database
-                            docker build -t apanj/database . 
+                            docker build -t database . 
 EOF
                             '''
                         }
