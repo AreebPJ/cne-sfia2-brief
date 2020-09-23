@@ -53,7 +53,7 @@ EOF
                             sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                            docker push apanj/database
+                            docker push apanj/frontend
 EOF
                             '''  
                             }
