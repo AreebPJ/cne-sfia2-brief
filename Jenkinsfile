@@ -76,21 +76,6 @@ EOF
                     }
                 }          
             }
-
-            stage('Build nginx Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh areebpanjwani09@34.105.155.158 <<EOF
-                            cd cne-sfia2-brief
-                            docker build -t nginx:latest .
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
             stage('Deploy App'){
                 steps{
                     sh '''
