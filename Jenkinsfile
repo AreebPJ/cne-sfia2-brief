@@ -50,8 +50,12 @@ EOF
                 steps{
                     script{
                         if (env.rollback == 'false'){
+                            sh '''
+                            ssh areebpanjwani09@34.105.155.158 <<EOF
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                                image.push("${env.app_version}")
+                            docker push apanj/database
+EOF
+                            '''  
                             }
                         }
                     }
@@ -61,7 +65,12 @@ EOF
                 steps{
                     script{
                         if (env.rollback == 'false'){
-                            image = docker.build("apanj/backend")
+                            sh '''
+                            ssh areebpanjwani09@34.105.155.158 <<EOF
+                            cd cne-sfia2-brief/backend
+                            docker build -t apanj/backend . 
+EOF
+                            '''
                         }
                     }
                 }          
@@ -70,8 +79,12 @@ EOF
                 steps{
                     script{
                         if (env.rollback == 'false'){
+                            sh '''
+                            ssh areebpanjwani09@34.105.155.158 <<EOF
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                                image.push("${env.app_version}")
+                            docker push apanj/backend
+EOF
+                            '''  
                             }
                         }
                     }
@@ -81,7 +94,12 @@ EOF
                 steps{
                     script{
                         if (env.rollback == 'false'){
-                            image = docker.build("apanj/database")
+                            sh '''
+                            ssh areebpanjwani09@34.105.155.158 <<EOF
+                            cd cne-sfia2-brief/database
+                            docker build -t apanj/database . 
+EOF
+                            '''
                         }
                     }
                 }          
@@ -90,8 +108,12 @@ EOF
                 steps{
                     script{
                         if (env.rollback == 'false'){
+                            sh '''
+                            ssh areebpanjwani09@34.105.155.158 <<EOF
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                                image.push("${env.app_version}")
+                            docker push apanj/database
+EOF
+                            '''                                 
                             }
                         }
                     }
@@ -100,8 +122,12 @@ EOF
             stage('Build nginx Image'){
                 steps{
                     script{
-                        if (env.rollback == 'false'){
-                            image = docker.build("nginx:latest")
+                            sh '''
+                            ssh areebpanjwani09@34.105.155.158 <<EOF
+                            cd cne-sfia2-brief
+                            docker build -t nginx:latest . 
+EOF
+                            '''
                         }
                     }
                 }          
@@ -110,7 +136,6 @@ EOF
                 steps{
                     sh '''
                     ssh areebpanjwani09@34.105.155.158 <<EOF
-                    git clone https://gitlab.com/AreebP/cne-sfia2-brief.git
                     cd cne-sfia2-brief
                     docker-compose up -d
 EOF
