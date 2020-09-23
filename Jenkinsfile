@@ -84,7 +84,7 @@ EOF
                             sh '''
                             ssh areebpanjwani09@34.105.155.158 <<EOF
                             cd cne-sfia2-brief
-                            image = docker.build("nginx:latest")
+                            docker build -t nginx:latest .
 EOF
                             '''
                         }
