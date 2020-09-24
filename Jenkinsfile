@@ -81,9 +81,9 @@ EOF
                     sh '''
                     ssh areebpanjwani09@35.234.139.63 <<EOF
                     cd cne-sfia2-brief
-                    export DATABASE_URI= $DATABASE_URI
-                    export SECRET_KEY= $SECRET_KEY
-                    export MYSQL_ROOT_PASSWORD= $MYSQL_ROOT_PASSWORD
+                    export DATABASE_URI=$DATABASE_URI
+                    export SECRET_KEY=$SECRET_KEY
+                    export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
                     docker-compose up -d
 EOF
                     '''
