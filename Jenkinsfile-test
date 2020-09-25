@@ -98,8 +98,7 @@ EOF
                     docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
                     cd ..
                     cd ..
-                    cd cne-sfia2-brief
-                    cd cne-sfia2-brief/backend/tests
+                    cd backend/tests
                     docker-compose exec -T backend pytest --cov application > backendpytest.txt
                     
 EOF
