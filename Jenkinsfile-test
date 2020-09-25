@@ -96,7 +96,8 @@ EOF
                     ssh areebpanjwani09@34.105.231.62 <<EOF
                     cd cne-sfia2-brief/frontend/tests
                     docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
-                    cd 
+                    cd ..
+                    cd ..
                     cd cne-sfia2-brief
                     cd cne-sfia2-brief/backend/tests
                     docker-compose exec -T backend pytest --cov application > backendpytest.txt
