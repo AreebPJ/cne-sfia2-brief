@@ -97,9 +97,23 @@ EOF
                     '''
                     }
                 }
+            stage('Deploy App'){
+                steps{
+                    sh '''
+                    ssh areebpanjwani09@34.105.231.62 <<EOF
+                    cd cne-sfia2-brief
+                    export DATABASE_URI=$DATABASE_URI
+                    export SECRET_KEY=$SECRET_KEY
+                    export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                    docker-compose up -d
+EOF
+                    '''
+                    }
 
-                }              
-            }
+                }
+             }              
+            
+        }
 
          
         
