@@ -91,16 +91,6 @@ EOF
                     }
 
                 }
-            stage(' Front-end Testing'){
-                steps{
-                    sh '''
-                    ssh areebpanjwani09@34.105.231.62 <<EOF
-                    cd cne-sfia2-brief/frontend/tests
-                    docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
-EOF
-                    '''
-                    }
-                }
             stage('Back-end Testing'){
                 steps{
                     sh '''
@@ -111,6 +101,17 @@ EOF
                     '''
                     }
                 }
+            stage(' Front-end Testing'){
+                steps{
+                    sh '''
+                    ssh areebpanjwani09@34.105.231.62 <<EOF
+                    cd cne-sfia2-brief/frontend/tests
+                    docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
+EOF
+                    '''
+                    }
+                }
+
              }              
             
         }
