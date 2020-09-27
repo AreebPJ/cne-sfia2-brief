@@ -101,16 +101,6 @@ EOF
                     '''
                     }
                 }
-            stage('Back-end Testing'){
-                steps{
-                    sh '''
-                    ssh areebpanjwani09@34.105.231.62 <<EOF
-                    cd cne-sfia2-brief/backend/tests
-                    docker-compose exec -T backend pytest --cov application > backendpytest.txt
-EOF
-                    '''
-                    }
-                }
 
              }              
             
