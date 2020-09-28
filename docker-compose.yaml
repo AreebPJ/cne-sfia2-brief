@@ -11,6 +11,7 @@ services:
     build: ./backend
     environment:
       DATABASE_URI: ${DATABASE_URI}
+      TEST_DATABASE_URI: ${TEST_DATABASE_URI}
       SECRET_KEY: ${SECRET_KEY}
     depends_on:
       - mysql
