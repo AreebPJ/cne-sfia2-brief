@@ -80,7 +80,7 @@ EOF
             stage('Deploy App'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-28-39 <<EOF
+                    ssh -tt ubuntu@ip-172-31-28-39 <<EOF
                     cd cne-sfia2-brief
                     export TEST_DATABASE_URI="$TEST_DATABASE_URI"
                     echo $TEST_DATABASE_URI
