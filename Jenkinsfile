@@ -96,6 +96,7 @@ EOF
                 steps{
                     sh '''
                     ssh ubuntu@ip-172-31-28-39 <<EOF
+                    sleep 20
                     cd cne-sfia2-brief/frontend/tests
                     docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
 EOF
