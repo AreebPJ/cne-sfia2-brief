@@ -82,10 +82,10 @@ EOF
                     sh '''
                     ssh ubuntu@ip-172-31-28-39 <<EOF
                     cd cne-sfia2-brief
-                    export TEST_DATABASE_URI=$TEST_DATABASE_URI
-                    export DATABASE_URI=$DATABASE_URI
-                    export SECRET_KEY=$SECRET_KEY
-                    export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                    export TEST_DATABASE_URI=mysql+pymysql://root:password@mysql:3306/testdb
+                    export DATABASE_URI=mysql+pymysql://root:password@mysql:3306/testdb
+                    export SECRET_KEY=password
+                    export MYSQL_ROOT_PASSWORD=password
                     docker-compose up -d
 EOF
                     '''
