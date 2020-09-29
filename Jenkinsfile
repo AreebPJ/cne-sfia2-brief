@@ -115,10 +115,10 @@ EOF
                 steps{
                     sh '''
                     ssh ubuntu@ip-172-31-28-39 <<EOF
-                    export DATABASE_URI="$DATABASE_URI"
-                    export SECRET_KEY="$SECRET_KEY"
-                    export MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD"
-                    export TEST_DATABASE_URI="$TEST_DATABASE_URI"
+                    export DATABASE_URI=$DATABASE_URI
+                    export SECRET_KEY=$SECRET_KEY
+                    export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                    export TEST_DATABASE_URI=$TEST_DATABASE_URI
                     echo $TEST_DATABASE_URI
                     cd cne-sfia2-brief/backend/tests
                     docker-compose exec -T backend pytest --cov application > backendpytest.txt
