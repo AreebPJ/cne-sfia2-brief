@@ -83,7 +83,7 @@ EOF
                     ssh ubuntu@ip-172-31-28-39 <<EOF
                     cd cne-sfia2-brief
                     export TEST_DATABASE_URI=mysql+pymysql://root:password@mysql:3306/testdb
-                    export DATABASE_URI=mysql+pymysql://root:password@mysql:3306/testdb
+                    export DATABASE_URI=mysql+pymysql://root:password@mysql:3306/users
                     export SECRET_KEY=password
                     export MYSQL_ROOT_PASSWORD=password
                     docker-compose up -d
