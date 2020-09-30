@@ -88,14 +88,13 @@ EOF
                     export MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD"
                     docker-compose up -d
                     sleep 20
-                    cd backend/tests
-                    docker-compose exec -T backend pytest --cov application > backendpytest.txt
-                    cd 
-                    cd cne-sfia2-brief
                     cd frontend/tests
                     docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
-                    cd
-                   
+                    cd 
+                    cd cne-sfia2-brief
+                    cd backend/tests
+                    docker-compose exec -T backend pytest --cov application > backendpytest.txt
+                                       
 EOF
                     '''
                     }
