@@ -90,7 +90,7 @@ EOF
                     sleep 20
                     cd frontend/tests
                     docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
-                    cd cne-sfia2-brief/backend/tests
+                    cd
                     cd cne-sfia2-brief/backend/tests
                     docker-compose exec -T backend pytest --cov application > backendpytest.txt
 EOF
