@@ -27,7 +27,7 @@ There are a minimum set of requirements that were added during the duration of t
 * As part of the project, you need to create an Ansible Playbook that will provision the environment that your CI Server needs to run.
 * The project must make use of a reverse proxy to make your application accessible to the user.
 
-##Aproach 
+## Aproach 
 The steps taken to acomplish the project were as follows:
 1. Get the app running with docker and docker compose.
  * This involved creating Dockerfiles to build images for the frontend, backend and database.
