@@ -110,25 +110,6 @@ EOF
                     }
 
                 }
-            stage('back end Testing'){
-                steps{
-                    sh '''
-                    ssh ubuntu@ip-172-31-12-193 <<EOF
-                    cd cne-sfia2-brief
-                    export TEST_DATABASE_URI="$TEST_DATABASE_URI"
-                    export DATABASE_URI="$DATABASE_URI"
-                    export SECRET_KEY="$SECRET_KEY"
-                    export MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD"
-                    docker-compose up -d
-                    sleep 20
-                    cd backend/tests
-                    docker-compose exec -T backend pytest --cov application > backendpytest.txt
-                                       
-EOF
-                    '''
-                    }
-
-                }
 
              }              
             
