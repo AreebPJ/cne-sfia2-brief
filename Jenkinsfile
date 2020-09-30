@@ -77,7 +77,22 @@ EOF
                     }
                 }          
             }
-            stage('Deploy & Testing'){
+            stage('Deploy'){
+                steps{
+                    sh '''
+                    ssh ubuntu@ip-172-31-28-39 <<EOF
+                    cd cne-sfia2-brief
+                    export TEST_DATABASE_URI="$TEST_DATABASE_URI"
+                    export DATABASE_URI="$DATABASE_URI"
+                    export SECRET_KEY="$SECRET_KEY"
+                    export MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD"
+                    docker-compose up -d                                       
+EOF
+                    '''
+                    }
+
+                }
+            stage('Testing'){
                 steps{
                     sh '''
                     ssh ubuntu@ip-172-31-28-39 <<EOF
