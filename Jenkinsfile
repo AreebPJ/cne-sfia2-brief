@@ -122,7 +122,7 @@ EOF
                     docker-compose up -d
                     sleep 20
                     cd backend/tests
-                   docker-compose exec backend "pytest --cov application > backendpytest.txt"
+                   docker-compose exec -T backend "pytest --cov application > backendpytest.txt"
                                        
 EOF
                     '''
