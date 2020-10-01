@@ -36,7 +36,7 @@ EOF
                     ssh ubuntu@ip-172-31-17-85 <<EOF 
                     cd cne-sfia2-brief
                     sudo docker-compose up -d
-EOF              
+ EOF              
                     '''
                 }
             }
