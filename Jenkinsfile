@@ -4,7 +4,7 @@ pipeline{
             stage('clone repo and change directory'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-20-98 <<EOF
+                    ssh ubuntu@ip-172-31-17-85 <<EOF
 		    rm -rf cne-sfia2-brief
                     git clone https://gitlab.com/AreebP/cne-sfia2-brief.git
                     cd cne-sfia2-brief
@@ -15,7 +15,7 @@ EOF
             stage('Install Docker and Docker-Compose'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-20-98 <<EOF
+                    ssh ubuntu@ip-172-31-17-85 <<EOF
                     curl https://get.docker.com | sudo bash 
                     sudo usermod -aG docker $(whoami)
                     sudo apt update
