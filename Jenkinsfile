@@ -77,7 +77,7 @@ EOF
                     }
                 }          
             }
-            stage('Deploy App for testing'){
+            stage('Front end testing'){
                 steps{
                     sh '''
                     ssh ubuntu@ip-172-31-17-85 <<EOF
@@ -90,8 +90,21 @@ EOF
 		    sleep 20
                     cd frontend/tests
                     docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
-		    cd
-		    cd cne-sfia2-brief/backend/tests
+EOF
+                    '''
+                    }
+            stage('Backend testing'){
+                steps{
+                    sh '''
+                    ssh ubuntu@ip-172-31-17-85 <<EOF
+                    cd cne-sfia2-brief
+                    export TEST_DATABASE_URI=$TEST_DATABASE_URI
+                    export DATABASE_URI=$DATABASE_URI
+                    export SECRET_KEY=$SECRET_KEY
+                    export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                    docker-compose up -d
+		    sleep 20
+                    cd backend/tests
 		    docker-compose exec -T backend pytest --cov application > backendpytest.txt
 EOF
                     '''
