@@ -1,17 +1,11 @@
+ 
 pipeline{
         agent any
-        stages{
-            stage('clone repo and change directory'){
-                steps{
-                    sh '''
-                    ssh ubuntu@ip-172-31-17-85 <<EOF
-		    rm -rf cne-sfia2-brief
-                    git clone https://github.com/AreebPJ/cne-sfia2-brief.git
-                    cd cne-sfia2-brief
-EOF
-                    '''
-            }
+        environment {
+            app_version = 'v1'
+            rollback = 'false'
         }
+        stages{
             stage('Install Docker and Docker-Compose'){
                 steps{
                     sh '''
@@ -29,16 +23,75 @@ EOF
   
             }
         }
-         
-	    stage('Deploy the application'){
+            stage('clone repo and change directory'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-17-85 <<EOF 
+                    ssh ubuntu@ip-172-31-17-85 <<EOF
+                    git clone https://github.com/AreebPJ/cne-sfia2-brief.git
                     cd cne-sfia2-brief
-                    sudo docker-compose up -d
- EOF              
+EOF
                     '''
-                }
             }
-        }    
-}
+        }
+      
+            stage('Build frontend Image'){
+                steps{
+                    script{
+                        if (env.rollback == 'false'){
+                            sh '''
+                            ssh ubuntu@ip-172-31-17-85 <<EOF
+                            cd cne-sfia2-brief/frontend
+                            docker build -t frontend . 
+EOF
+                            '''
+                        }
+                    }
+                }          
+            }
+
+            stage('Build backend Image'){
+                steps{
+                    script{
+                        if (env.rollback == 'false'){
+                            sh '''
+                            ssh ubuntu@ip-172-31-17-85<<EOF
+                            cd cne-sfia2-brief/backend
+                            docker build -t backend . 
+EOF
+                            '''
+                        }
+                    }
+                }          
+            }
+
+            stage('Build database Image'){
+                steps{
+                    script{
+                        if (env.rollback == 'false'){
+                            sh '''
+                            ssh ubuntu@ip-172-31-17-85<<EOF
+                            cd cne-sfia2-brief/database
+                            docker build -t mysql . 
+EOF
+                            '''
+                        }
+                    }
+                }          
+            }
+            stage('Deploy App'){
+                steps{
+                    sh '''
+                    ssh ubuntu@ip-172-31-17-85 <<EOF
+                    cd cne-sfia2-brief
+                    export TEST_DATABASE_URI=$TEST_DATABASE_URI
+                    export DATABASE_URI=$DATABASE_URI
+                    export SECRET_KEY=$SECRET_KEY
+                    export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                    docker-compose up -d
+EOF
+                    '''
+                    }
+                }          
+            }
+
+        } 
