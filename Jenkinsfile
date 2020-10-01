@@ -93,6 +93,7 @@ EOF
 EOF
                     '''
                     }
+	    }
             stage('Backend testing'){
                 steps{
                     sh '''
