@@ -5,6 +5,7 @@ pipeline{
                 steps{
                     sh '''
                     ssh ubuntu@ip-172-31-17-85 << EOF
+		    rm -rf cne-sfia2-brief
                     git clone https://github.com/AreebPJ/cne-sfia2-brief.git
 EOF                 
                     '''
