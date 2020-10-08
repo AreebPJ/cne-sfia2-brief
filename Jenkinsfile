@@ -86,7 +86,7 @@ EOF
                     export DATABASE_URI=${DATABASE_URI}
                     echo $DATABASE_URI
                     export SECRET_KEY=${SECRET_KEY}
-                    export MYSQL_ADMIN_PASSWORD=${MYSQL_ADMIN_PASSWORD}
+                    export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
                     docker-compose up -d
 EOF
                     '''
