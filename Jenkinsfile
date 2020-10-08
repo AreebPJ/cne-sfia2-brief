@@ -9,7 +9,7 @@ pipeline{
             stage('Install Docker and Docker-Compose'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-41-203 <<EOF
+                    ssh ubuntu@ip-172-31-38-184 <<EOF
                     curl https://get.docker.com | sudo bash 
                     sudo usermod -aG docker $(whoami)
                     sudo apt update
@@ -26,7 +26,7 @@ EOF
             stage('clone repo and change directory'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-41-203 <<EOF
+                    ssh ubuntu@ip-172-31-38-184 <<EOF
                     git clone https://github.com/AreebPJ/cne-sfia2-brief.git
                     cd cne-sfia2-brief
 EOF
@@ -39,7 +39,7 @@ EOF
                     script{
                         if (env.rollback == 'false'){
                             sh '''
-                            ssh ubuntu@ip-172-31-41-203 <<EOF
+                            ssh ubuntu@ip-172-31-38-184 <<EOF
                             cd cne-sfia2-brief/frontend
                             docker build -t frontend . 
 EOF
@@ -54,7 +54,7 @@ EOF
                     script{
                         if (env.rollback == 'false'){
                             sh '''
-                            ssh ubuntu@ip-172-31-41-203<<EOF
+                            ssh ubuntu@ip-172-31-38-184<<EOF
                             cd cne-sfia2-brief/backend
                             docker build -t backend . 
 EOF
@@ -69,7 +69,7 @@ EOF
                     script{
                         if (env.rollback == 'false'){
                             sh '''
-                            ssh ubuntu@ip-172-31-41-203<<EOF
+                            ssh ubuntu@ip-172-31-38-184<<EOF
                             cd cne-sfia2-brief/database
                             docker build -t mysql . 
 EOF
@@ -81,7 +81,7 @@ EOF
             stage('Deploy App'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-41-203<<EOF
+                    ssh ubuntu@ip-172-31-38-184<<EOF
                     cd cne-sfia2-brief
                     export DATABASE_URI=$DATABASE_URI
                     export SECRET_KEY=$SECRET_KEY
