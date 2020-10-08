@@ -19,7 +19,7 @@ services:
     image: mysql
     build: ./database
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ADMIN_PASSWORD=${MYSQL_ADMIN_PASSWORD}
  
   nginx:
     image: nginx
