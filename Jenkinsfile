@@ -99,6 +99,7 @@ EOF
                     sh '''
                     ssh ubuntu@ip-172-31-46-82<<EOF
                     cd cne-sfia2-brief
+		    export DATABASE_URI=$DATABASE_URI
 		    export TEST_DATABASE_URI=$TEST_DATABASE_URI
                     export SECRET_KEY=$SECRET_KEY
                     export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
