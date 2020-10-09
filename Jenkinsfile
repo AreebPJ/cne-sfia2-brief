@@ -97,7 +97,7 @@ EOF
             stage('Backend testing'){
                 steps{
                     sh '''
-                    ssh uubuntu@ip-172-31-40-140 <<EOF
+                    ssh ubuntu@ip-172-31-40-140 <<EOF
                     cd cne-sfia2-brief
 		    export DATABASE_URI=$DATABASE_URI
                     export TEST_DATABASE_URI=$TEST_DATABASE_URI
