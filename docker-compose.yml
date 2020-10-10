@@ -1,13 +1,13 @@
 version: '3.7'
 services:
   frontend:
-    image: frontend
+    image: apanj/frontend
     build: ./frontend
     depends_on:
       - backend
 
   backend:
-    image: backend
+    image: apanj/backend
     build: ./backend
     environment:
       DATABASE_URI: ${DATABASE_URI}
@@ -16,7 +16,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql
+    image: apanj/mysql
     build: ./database
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
