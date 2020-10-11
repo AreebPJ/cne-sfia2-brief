@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: database
+  name: mysql
 spec:
   selector:
-    app: database
+    app: mysql
   ports: 
   - protocol: TCP
     port: 3306
@@ -13,20 +13,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: database
+  name: mysql
   labels: 
-    app: database
+    app: mysql
 spec:
   selector:
     matchLabels:
-      app: database
+      app: mysql
   template:
     metadata:
       labels:
-        app: database
+        app: mysql
     spec:
       containers:
-      - name: database
+      - name: mysql
         image: apanj/mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
         ports:
         - containerPort: 3306

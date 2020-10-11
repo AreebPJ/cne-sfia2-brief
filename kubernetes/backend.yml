@@ -28,5 +28,10 @@ spec:
       containers:
       - name: backend
         image: apanj/backend:latest
+        env:
+        - name: DATABASE_URI
+          value: "mysql+pymysql://root:password@mysql:3306/users"
+        - name: SECRET_KEY
+          value: "password"
         ports:
         - containerPort: 5001
