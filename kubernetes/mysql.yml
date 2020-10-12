@@ -30,6 +30,6 @@ spec:
         image: apanj/mysql:latest
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: ${MYSQL_ROOT_PASSWORD}
+          value: password
         ports:
         - containerPort: 3306
