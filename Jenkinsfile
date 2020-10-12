@@ -8,7 +8,7 @@ pipeline{
             stage('Install Docker and Docker-Compose'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-33-5 <<EOF
+                    ssh ubuntu@ip-172-31-47-219 <<EOF
                     curl https://get.docker.com | sudo bash 
                     sudo usermod -aG docker $(whoami)
                     sudo apt update
@@ -22,12 +22,11 @@ EOF
   
             }
         }
-            stage('clone repo and change directory'){
+            stage('clone repo'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-33-5 <<EOF
+                    ssh ubuntu@ip-172-31-47-219<<EOF
                     git clone https://github.com/AreebPJ/cne-sfia2-brief.git
-                    cd cne-sfia2-brief
 EOF
                     '''
             }
@@ -36,7 +35,7 @@ EOF
                 steps{
                 withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DB_URI'), string(credentialsId: 'TEST_DATABASE_URI', variable: 'TDB_URI'), string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'DB_PASSWORD'), string(credentialsId: 'SECRET_KEY', variable: 'SK')]) {
                      sh '''
-                     ssh ubuntu@ip-172-31-33-5<<EOF
+                     ssh ubuntu@ip-172-31-47-219<<EOF
                      cd cne-sfia2-brief
                      export DATABASE_URI=$DATABASE_URI
                      export TEST_DATABASE_URI=$TEST_DATABASE_URI
@@ -55,7 +54,7 @@ EOF
                 steps{
                 withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DB_URI'), string(credentialsId: 'TEST_DATABASE_URI', variable: 'TDB_URI'), string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'DB_PASSWORD'), string(credentialsId: 'SECRET_KEY', variable: 'SK')]) {
                     sh '''
-                    ssh ubuntu@ip-172-31-33-5<<EOF
+                    ssh ubuntu@ip-172-31-47-219<<EOF
                     cd cne-sfia2-brief
 		    export DATABASE_URI=$DATABASE_URI
 		    export TEST_DATABASE_URI=$TEST_DATABASE_URI
