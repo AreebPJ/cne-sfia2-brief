@@ -10,7 +10,7 @@ pipeline{
                 steps{
                     sh '''
                     ssh areebpanjwani09@35.242.153.141 <<EOF
-                    rm -rf cne-sia2-brief
+                    rm -rf cne-sfia2-brief
                     git clone https://github.com/AreebPJ/cne-sfia2-brief.git
 EOF
                     '''
