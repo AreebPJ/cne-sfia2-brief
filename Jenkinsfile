@@ -23,7 +23,7 @@ EOF
                     ssh areebpanjwani09@35.242.153.141<<EOF
                     cd cne-sfia2-brief
                     export DATABASE_URI=${DATABASE_URI}
-                    echo $DATABASE_URI
+                    export TEST_DATABASE_URI=$TEST_DATABASE_URI
                     export SECRET_KEY=${SECRET_KEY}
                     export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
                     docker-compose build 
@@ -39,7 +39,7 @@ EOF
                     ssh areebpanjwani09@35.242.153.141<<EOF
                     cd cne-sfia2-brief
                     export DATABASE_URI=${DATABASE_URI}
-                    echo $DATABASE_URI
+                    export TEST_DATABASE_URI=$TEST_DATABASE_URI
                     export SECRET_KEY=${SECRET_KEY}
                     export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
                     kubectl apply -f kubernetes 
