@@ -8,7 +8,7 @@ pipeline{
             stage('Install Docker and Docker-Compose'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-46-82 <<EOF
+                    ssh ubuntu@ip-172-31-33-5 <<EOF
                     curl https://get.docker.com | sudo bash 
                     sudo usermod -aG docker $(whoami)
                     sudo apt update
@@ -25,88 +25,47 @@ EOF
             stage('clone repo and change directory'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-46-82 <<EOF
+                    ssh ubuntu@ip-172-31-33-5 <<EOF
                     git clone https://github.com/AreebPJ/cne-sfia2-brief.git
                     cd cne-sfia2-brief
 EOF
                     '''
             }
         }
-      
-            stage('Build frontend Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh ubuntu@ip-172-31-46-82 <<EOF
-                            cd cne-sfia2-brief/frontend
-                            docker build -t frontend . 
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
-
-            stage('Build backend Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh ubuntu@ip-172-31-46-82<<EOF
-                            cd cne-sfia2-brief/backend
-                            docker build -t backend . 
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
-
-            stage('Build database Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh ubuntu@ip-172-31-46-82<<EOF
-                            cd cne-sfia2-brief/database
-                            docker build -t mysql . 
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
             stage('Front end testing'){
                 steps{
-                    sh '''
-                    ssh ubuntu@ip-172-31-46-82<<EOF
-                    cd cne-sfia2-brief
-		    export DATABASE_URI=$DATABASE_URI
-                    export TEST_DATABASE_URI=$TEST_DATABASE_URI
-                    export SECRET_KEY=$SECRET_KEY
-                    export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-                    docker-compose up -d
-		    sleep 20
-                    cd frontend/tests
-                    docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
-EOF
-                    '''
+                withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DB_URI'), string(credentialsId: 'TEST_DATABASE_URI', variable: 'TDB_URI'), string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'DB_PASSWORD'), string(credentialsId: 'SECRET_KEY', variable: 'SK')]) {
+                     sh '''
+                     ssh ubuntu@ip-172-31-33-5<<EOF
+                     cd cne-sfia2-brief
+             		 export DATABASE_URI=$DATABASE_URI
+                     export TEST_DATABASE_URI=$TEST_DATABASE_URI
+                     export SECRET_KEY=$SECRET_KEY
+                     export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+                     docker-compose up -d
+             		 sleep 20
+                     cd frontend/tests
+                     docker-compose exec -T frontend pytest --cov application > frontendpytest.txt
+             EOF
+                                 '''
+                                 }
+                            }
                     }
-	    }
             stage('Backend testing'){
                 steps{
+                withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DB_URI'), string(credentialsId: 'TEST_DATABASE_URI', variable: 'TDB_URI'), string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'DB_PASSWORD'), string(credentialsId: 'SECRET_KEY', variable: 'SK')]) {
                     sh '''
-                    ssh ubuntu@ip-172-31-46-82<<EOF
+                    ssh ubuntu@ip-172-31-33-5<<EOF
                     cd cne-sfia2-brief
-		    export DATABASE_URI=$DATABASE_URI
-		    export TEST_DATABASE_URI=$TEST_DATABASE_URI
+		            export DATABASE_URI=$DATABASE_URI
+		            export TEST_DATABASE_URI=$TEST_DATABASE_URI
                     export SECRET_KEY=$SECRET_KEY
                     export MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
                     cd backend/tests
-		    docker-compose exec -T backend pytest --cov application > backendpytest.txt
+		            docker-compose exec -T backend pytest --cov application > backendpytest.txt
 EOF
                     '''
+                        }
                     }
                 }          
             }
