@@ -1,6 +1,6 @@
 # QAC SFIA2 Project
 
-## Getting Started 
+## Application
 
 The application is a Flask application running in **2 micro-services** (*frontend* and *backend*).
 The application works by:
@@ -27,13 +27,17 @@ There are a minimum set of requirements that were added during the duration of t
 * As part of the project, you need to create an Ansible Playbook that will provision the environment that your CI Server needs to run.
 * The project must make use of a reverse proxy to make your application accessible to the user.
 
-## Aproach 
-The steps taken to acomplish the project were as follows:
-1. Get the app running with docker and docker compose.
- * This involved creating Dockerfiles to build images for the frontend, backend and database.
- * Creating a yaml file to build the images and deploy the app
-2. Jenkins
- * Deploy Jenkins on another VM
- * Create a pipeline job that will ssh onto the deploy VM, build the images and deploy the app.
- * Another jenkins job for the test VM that test the backend and frontend service before deploying it. 
+## Getting Started
+The steps taken automate the testing and deployment of the application were as follows:
+1. Terraform
+Terraform was used to spin up 2 EC2 instances. 
+One EC2 instance for jenkins and one for testing.
+Two RDS instances. One for testing and one for deployment.
+After the instances have been spun up terraform outputs the public DNS for the instance to be configured for jenkins.
+
+2. Ansible
+The 
+
+
+ 
 
