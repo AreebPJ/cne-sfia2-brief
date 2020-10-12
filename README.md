@@ -28,15 +28,23 @@ There are a minimum set of requirements that were added during the duration of t
 * The project must make use of a reverse proxy to make your application accessible to the user.
 
 ## Getting Started
-The steps taken automate the testing and deployment of the application were as follows:
-1. Terraform
-Terraform was used to spin up 2 EC2 instances. 
-One EC2 instance for jenkins and one for testing.
+The steps taken to automate the testing and deployment of the application were as follows:
+1. Terraform was used to spin up the instances on AWS. 
+One EC2 instance to be configured with jenkins and one for testing.
 Two RDS instances. One for testing and one for deployment.
 After the instances have been spun up terraform outputs the public DNS for the instance to be configured for jenkins.
 
-2. Ansible
-The 
+2. Ansible was used to configure an EC2 instance with jenkins. 
+After terraform successfully spins up the instances it outputs a public DNS. This was pasted into the ansible inventory file. The public key configuration was automated as a pem key was added whilst creating the EC2 instances. The ansible playbook installs java and jenkins. 
+
+3. After running the ansible playbook ssh access was configured from the jenkins VM to the test VM by generating a key pair in the jenkins instance and pasting it into the authorized keys file of the test VM. This is for the jenkins pipeline job to be able to ssh into the test vm and run commands
+
+4. RDS instances for production and testing were accessed and the tables and data were inserted.  
+
+5. To accomplish the testing the jenkins EC2 instance was accessed. Jenkins was setup and the pipeline jobs for testing had been created. The jenkins pipeline job for the testing configures the test instance by installing all the relevant applications, builds the image and executes the tests. 
+
+6. The production VM was on GCP. Kubernetes was used on a Google cloud cluster. This VM had been configured before hand and then the pipeline job deploys the app by connecting to the GCP VM.  
+
 
 
  
