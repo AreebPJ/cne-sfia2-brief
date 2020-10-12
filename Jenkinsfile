@@ -6,92 +6,48 @@ pipeline{
             rollback = 'false'
         }
         stages{
-            stage('Install Docker and Docker-Compose'){
+            stage('clone repo'){
                 steps{
                     sh '''
-                    ssh ubuntu@ip-172-31-41-205 <<EOF
-                    curl https://get.docker.com | sudo bash 
-                    sudo usermod -aG docker $(whoami)
-                    sudo apt update
-                    sudo apt install -y curl jq
-                    version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
-                    sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-                    sudo chmod 666 /var/run/docker.sock
-EOF
-                    '''
-  
-            }
-        }
-            stage('clone repo and change directory'){
-                steps{
-                    sh '''
-                    ssh ubuntu@ip-172-31-44-158 <<EOF
+                    ssh areebpanjwani09@35.242.153.141 <<EOF
+                    rm -rf cne-sia2-brief
                     git clone https://github.com/AreebPJ/cne-sfia2-brief.git
-                    cd cne-sfia2-brief
 EOF
                     '''
             }
         }
-      
-            stage('Build frontend Image'){
+            stage('Build Images'){
                 steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh ubuntu@ip-172-31-44-158 <<EOF
-                            cd cne-sfia2-brief/frontend
-                            docker build -t frontend . 
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
-
-            stage('Build backend Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh ubuntu@ip-172-31-44-158<<EOF
-                            cd cne-sfia2-brief/backend
-                            docker build -t backend . 
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
-
-            stage('Build database Image'){
-                steps{
-                    script{
-                        if (env.rollback == 'false'){
-                            sh '''
-                            ssh ubuntu@ip-172-31-44-158<<EOF
-                            cd cne-sfia2-brief/database
-                            docker build -t mysql . 
-EOF
-                            '''
-                        }
-                    }
-                }          
-            }
-            stage('Deploy App'){
-                steps{
+                withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DB_URI'), string(credentialsId: 'TEST_DATABASE_URI', variable: 'TDB_URI'), string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'DB_PASSWORD'), string(credentialsId: 'SECRET_KEY', variable: 'SK')]) {
                     sh '''
-                    ssh ubuntu@ip-172-31-44-158<<EOF
+                    ssh areebpanjwani09@35.242.153.141<<EOF
                     cd cne-sfia2-brief
                     export DATABASE_URI=${DATABASE_URI}
                     echo $DATABASE_URI
                     export SECRET_KEY=${SECRET_KEY}
                     export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-                    docker-compose up -d
+                    docker-compose build 
 EOF
                     '''
+                        }
                     }
-                }          
+                }
+            stage('Deploy App using k8'){
+                steps{
+                withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DB_URI'), string(credentialsId: 'TEST_DATABASE_URI', variable: 'TDB_URI'), string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'DB_PASSWORD'), string(credentialsId: 'SECRET_KEY', variable: 'SK')]) {
+                    sh '''
+                    ssh areebpanjwani09@35.242.153.141<<EOF
+                    cd cne-sfia2-brief
+                    export DATABASE_URI=${DATABASE_URI}
+                    echo $DATABASE_URI
+                    export SECRET_KEY=${SECRET_KEY}
+                    export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+                    kubectl apply -f kubernetes 
+EOF
+                    '''
+                         }
+                    }
             }
 
         } 
+}
