@@ -10,6 +10,7 @@ services:
     image: apanj/backend
     build: ./backend
     environment:
+      TEST_DATABASE_URI: ${TEST_DATABASE_URI}
       DATABASE_URI: ${DATABASE_URI}
       SECRET_KEY: ${SECRET_KEY}
     depends_on:
