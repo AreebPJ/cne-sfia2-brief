@@ -28,8 +28,8 @@ There are a minimum set of requirements that were added during the duration of t
 * The project must make use of a reverse proxy to make your application accessible to the user.
 
 ## Getting Started
-The initial setup involved creating the dockerfiles for the application. There after the yaml files for docker-compose were created.  
-The steps taken to automate the testing and deployment of the application were as follows:
+The initial setup involved creating the dockerfiles and yaml files for the application. After all the dockerfiles and yaml files had been drafted up   
+the steps taken to automate the testing and deployment of the application were as follows:
 1. Terraform was used to spin up the instances on AWS. 
 One EC2 instance to be configured with jenkins and one for testing.
 Two RDS instances. One for testing and one for deployment.
@@ -45,6 +45,18 @@ After terraform successfully spins up the instances it outputs a public DNS. Thi
 5. To accomplish the testing the jenkins EC2 instance was accessed. Jenkins was setup and the pipeline jobs for testing had been created. The jenkins pipeline job for the testing configures the test instance by installing all the relevant applications, builds the image and executes the tests. 
 
 6. The production VM was on GCP. Kubernetes was used on a Google cloud cluster. This VM had been configured before hand and then the pipeline job deploys the app by connecting to the GCP VM.  
+
+## Project Planning.
+Kanban Boards were used for the planning of this project.
+![image](https://user-images.githubusercontent.com/47117365/95831846-786e8680-0d31-11eb-90e6-d9a38c423007.png)
+
+
+## Future Improvements
+Given more time the app would have the functinality to rollback to diffrent versions.
+Kubernetes could be more automated by setting up the infrastructure with terraform and automating with jenkins.
+
+## Authors
+Areeb Panjwani
 
 
 
