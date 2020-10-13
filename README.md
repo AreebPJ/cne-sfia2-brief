@@ -28,6 +28,7 @@ There are a minimum set of requirements that were added during the duration of t
 * The project must make use of a reverse proxy to make your application accessible to the user.
 
 ## Getting Started
+The initial setup involved creating the dockerfiles for the application.  
 The steps taken to automate the testing and deployment of the application were as follows:
 1. Terraform was used to spin up the instances on AWS. 
 One EC2 instance to be configured with jenkins and one for testing.
